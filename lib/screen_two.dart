@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_tutorials/screen_one.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ScreenTwo extends StatefulWidget {
+  const ScreenTwo({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ScreenTwo> createState() => _ScreenTwoState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ScreenTwoState extends State<ScreenTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('getx Tutorials'),
+        title: Text('Screen Two'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,18 +86,14 @@ class _HomeScreenState extends State<HomeScreen> {
         //   ),
         // ),
         Center(child: TextButton(onPressed: (){
-          // Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenOne()));
-          // Get.to(ScreenOne(name: "Abhay Kevat",));
-          Get.toNamed('/screenOne',arguments: [
-            'Abhay',
-            'My Name Is AK'
-          ]);
-        }, child: Text("GO TO NEXT PAGE")))
+          // Navigator.pop(context);
+          // Get.back();
+          // Get.back();
+        }, child: Text("Go Back")))
       ]),
       // floatingActionButton: FloatingActionButton(onPressed: (){
       //   Get.snackbar("Abhay Kevat", "Follow to Page",mainButton: TextButton(onPressed: (){}, child: Text("Button")),duration:Duration(seconds: 5) ,snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.white,colorText: Colors.blue,icon: Icon(Icons.facebook));
       // }),
-    );
-
+    );;
   }
 }
