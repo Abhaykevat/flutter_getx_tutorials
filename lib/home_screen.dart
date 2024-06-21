@@ -1,6 +1,7 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_getx_tutorials/counter_controller.dart';
 // import 'package:flutter_getx_tutorials/screen_one.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 // class HomeScreen extends StatefulWidget {
 //   const HomeScreen({super.key});
@@ -105,8 +106,110 @@
 
 
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final heigh=MediaQuery.of(context).size.height*1;
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Getx Tutorials"),
+//       ),
+//       body: Column(children: [
+//         Container(
+//         color: Colors.red,
+//         height: Get.height*.2,
+//         width: Get.width*.8,
+//         child: Center(
+//           child: Text('center'),
+//         ),
+//       ),
+//       Container(
+//         color: Colors.blue,
+//         height: Get.height*.2,
+//         width: Get.width*.8,
+//         child: Center(
+//           child: Text('center'),
+//         ),
+//       ),
+//       ],)
+//     );
+//   }
+// }
+
+
+
+
+
+
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Getx Tut'),),
+//       body: Column(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           ListTile(
+//             title: Text('message'.tr),
+//             subtitle: Text('name'.tr),
+//           ),
+//           SizedBox(
+//             height: 50,
+//           ),
+//           Row(
+//             children: [
+//               OutlinedButton(onPressed: (){
+//                 Get.updateLocale(Locale('en','US'));
+//               }, child: Text('English')),
+//               const SizedBox(width: 20,),
+//               OutlinedButton(onPressed: (){
+//                 Get.updateLocale(Locale('ur','PK'));
+//               }, child: Text('Urdu')),
+//               const SizedBox(width: 20,),
+//               OutlinedButton(onPressed: (){
+//                 Get.updateLocale(Locale('hi','IN'));
+//               }, child: Text('Hindi')),
+//             ],
+//           ),
+//           Row(
+//             children: [
+//               OutlinedButton(onPressed: (){
+//                 Get.updateLocale(Locale('mr','IN'));
+//               }, child: Text('Marathi')),
+//               const SizedBox(width: 20,),
+//               OutlinedButton(onPressed: (){
+//                 Get.updateLocale(Locale('bn','BD'));
+//               }, child: Text('bangali')),
+//               const SizedBox(width: 20,),
+//               OutlinedButton(onPressed: (){
+//                 Get.updateLocale(Locale('sn','LK'));
+//               }, child: Text('Sinhala')),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -115,32 +218,35 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> 
+{
+  final CounterController controller=Get.put(CounterController());
+  // int counter=0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    final heigh=MediaQuery.of(context).size.height*1;
+    
     return Scaffold(
       appBar: AppBar(
-        title: Text("Getx Tutorials"),
+        title: Text("Getx tut"),
       ),
-      body: Column(children: [
-        Container(
-        color: Colors.red,
-        height: Get.height*.2,
-        width: Get.width*.8,
-        child: Center(
-          child: Text('center'),
-        ),
+      body: Center(child: 
+      Obx((){
+        print('Rebuild');
+        return Text(controller.counter.toString(),style: TextStyle(),);
+      })
       ),
-      Container(
-        color: Colors.blue,
-        height: Get.height*.2,
-        width: Get.width*.8,
-        child: Center(
-          child: Text('center'),
-        ),
-      ),
-      ],)
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        controller.incrementCounter();
+        // counter++;
+        // setState(() {
+          
+        // });
+      }),
     );
   }
 }
