@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_tutorials/counter_controller.dart';
+// import 'package:flutter_getx_tutorials/counter_controller.dart';
+import 'package:flutter_getx_tutorials/example_two.dart';
 // import 'package:flutter_getx_tutorials/screen_one.dart';
 import 'package:get/get.dart';
 
@@ -211,6 +213,107 @@ import 'package:get/get.dart';
 // }
 
 
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> 
+// {
+//   final CounterController controller=Get.put(CounterController());
+//   // int counter=0;
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+    
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Getx tut"),
+//       ),
+//       body: Center(child: 
+//       Obx((){
+//         print('Rebuild');
+//         return Text(controller.counter.toString(),style: TextStyle(),);
+//       })
+//       ),
+//       floatingActionButton: FloatingActionButton(onPressed: (){
+//         controller.incrementCounter();
+//         // counter++;
+//         // setState(() {
+          
+//         // });
+//       }),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> 
+// {
+//   ExampleTwoController exampletwocontroller=Get.put(ExampleTwoController());
+  
+
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     print('build');
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Getx tut"),
+//       ),
+//       body: Column(
+//         children: [
+//           Obx(() => Container(
+//             height: 200,
+//             width: 200,
+//             color: Colors.red.withOpacity(exampletwocontroller.opacity.value),
+//           ),),
+//           Obx(() => 
+//           Slider(value:exampletwocontroller.opacity.value, onChanged:(value){
+//             // print(value);
+//             // opacity=value;
+//             exampletwocontroller.setOpacity(value);
+
+            
+//           })
+//           ),
+          
+          
+//         ],
+//       )
+      
+//     );
+//   }
+// }
+
+
+
+
+
+
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -220,8 +323,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> 
 {
-  final CounterController controller=Get.put(CounterController());
-  // int counter=0;
+  ExampleController exampleController=Get.put(ExampleController());
+  // bool notification =false;
   @override
   void initState() {
     // TODO: implement initState
@@ -229,24 +332,37 @@ class _HomeScreenState extends State<HomeScreen>
   }
   @override
   Widget build(BuildContext context) {
-    
+    print('build');
     return Scaffold(
       appBar: AppBar(
         title: Text("Getx tut"),
       ),
-      body: Center(child: 
-      Obx((){
-        print('Rebuild');
-        return Text(controller.counter.toString(),style: TextStyle(),);
-      })
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        controller.incrementCounter();
-        // counter++;
-        // setState(() {
-          
-        // });
-      }),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Notifications"),
+              // Switch(value: exampleController.notification.value, onChanged: (value){
+              //   // notification=value;
+              //   exampleController.setNotification(value);
+              //   // setState(() {
+                  
+              //   // });
+              // }),
+              Obx(() =>  Switch(value: exampleController.notification.value, onChanged: (value){
+                // notification=value;
+                exampleController.setNotification(value);
+                // setState(() {
+                  
+                // });
+              }),)
+
+            ],
+          )
+        ],
+      )
+      
     );
   }
 }
