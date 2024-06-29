@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_tutorials/counter_controller.dart';
 // import 'package:flutter_getx_tutorials/counter_controller.dart';
 import 'package:flutter_getx_tutorials/example_two.dart';
 import 'package:flutter_getx_tutorials/favourite_controller.dart';
+import 'package:flutter_getx_tutorials/image_picker_controller.dart';
 // import 'package:flutter_getx_tutorials/screen_one.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 // class HomeScreen extends StatefulWidget {
 //   const HomeScreen({super.key});
@@ -379,6 +383,62 @@ import 'package:get/get.dart';
 
 
 
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> 
+// {
+//   FavouriteController controller=Get.put(FavouriteController());
+//   // List<String> fruitList=['orange','Apple','banana','PineApple','papaya'];
+//   // List<String> tempfruitList=[];
+
+  
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     print('build');
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Getx Tutprials"),
+//       ),
+//       body: ListView.builder(
+//         itemCount: controller.fruitList.length,
+//         itemBuilder: (context,index){
+//         return Card(
+//           child: ListTile(
+//             onTap: (){
+//               if(controller.tempfruitList.contains(controller.fruitList[index].toString())){
+//                 controller.removeToFavourite(controller.fruitList[index].toString());
+//               }
+//               else{
+//                 controller.addToFavourite(controller.fruitList[index].toString());
+//               }
+//             },
+//             title: Text(controller.fruitList[index].toString()),
+//             // trailing: Icon(Icons.favorite,color: controller.tempfruitList.contains(controller.fruitList[index].toString()) ? Colors.red :Colors.white),
+//             trailing: Obx(() => Icon(Icons.favorite,color: controller.tempfruitList.contains(controller.fruitList[index].toString()) ? Colors.red :Colors.white)),
+//           ),
+//         );
+//       }),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -388,11 +448,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> 
 {
-  FavouriteController controller=Get.put(FavouriteController());
-  // List<String> fruitList=['orange','Apple','banana','PineApple','papaya'];
-  // List<String> tempfruitList=[];
+  ImagePickerController controller=Get.put(ImagePickerController());
 
-  
   @override
   void initState() {
     // TODO: implement initState
@@ -405,25 +462,20 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         title: Text("Getx Tutprials"),
       ),
-      body: ListView.builder(
-        itemCount: controller.fruitList.length,
-        itemBuilder: (context,index){
-        return Card(
-          child: ListTile(
-            onTap: (){
-              if(controller.tempfruitList.contains(controller.fruitList[index].toString())){
-                controller.removeToFavourite(controller.fruitList[index].toString());
-              }
-              else{
-                controller.addToFavourite(controller.fruitList[index].toString());
-              }
-            },
-            title: Text(controller.fruitList[index].toString()),
-            // trailing: Icon(Icons.favorite,color: controller.tempfruitList.contains(controller.fruitList[index].toString()) ? Colors.red :Colors.white),
-            trailing: Obx(() => Icon(Icons.favorite,color: controller.tempfruitList.contains(controller.fruitList[index].toString()) ? Colors.red :Colors.white)),
-          ),
+      body: Obx((){
+        return Column(
+           children: [
+            CircleAvatar(
+              backgroundImage: controller.imagePath.isNotEmpty ?
+              FileImage(File(controller.imagePath.toString())) :
+              null
+            ),
+            TextButton(onPressed: (){
+              controller.getImage();
+            }, child: Text('Pick Image'))
+           ],
         );
-      }),
+      })
     );
   }
 }
