@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx_tutorials/counter_controller.dart';
 // import 'package:flutter_getx_tutorials/counter_controller.dart';
 import 'package:flutter_getx_tutorials/example_two.dart';
+import 'package:flutter_getx_tutorials/favourite_controller.dart';
 // import 'package:flutter_getx_tutorials/screen_one.dart';
 import 'package:get/get.dart';
 
@@ -314,6 +315,70 @@ import 'package:get/get.dart';
 
 
 
+// class HomeScreen extends StatefulWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> 
+// {
+//   ExampleController exampleController=Get.put(ExampleController());
+//   // bool notification =false;
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     print('build');
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Getx tut"),
+//       ),
+//       body: Column(
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               Text("Notifications"),
+//               // Switch(value: exampleController.notification.value, onChanged: (value){
+//               //   // notification=value;
+//               //   exampleController.setNotification(value);
+//               //   // setState(() {
+                  
+//               //   // });
+//               // }),
+//               Obx(() =>  Switch(value: exampleController.notification.value, onChanged: (value){
+//                 // notification=value;
+//                 exampleController.setNotification(value);
+//                 // setState(() {
+                  
+//                 // });
+//               }),)
+
+//             ],
+//           )
+//         ],
+//       )
+      
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -323,8 +388,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> 
 {
-  ExampleController exampleController=Get.put(ExampleController());
-  // bool notification =false;
+  FavouriteController controller=Get.put(FavouriteController());
+  // List<String> fruitList=['orange','Apple','banana','PineApple','papaya'];
+  // List<String> tempfruitList=[];
+
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -335,34 +403,27 @@ class _HomeScreenState extends State<HomeScreen>
     print('build');
     return Scaffold(
       appBar: AppBar(
-        title: Text("Getx tut"),
+        title: Text("Getx Tutprials"),
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Notifications"),
-              // Switch(value: exampleController.notification.value, onChanged: (value){
-              //   // notification=value;
-              //   exampleController.setNotification(value);
-              //   // setState(() {
-                  
-              //   // });
-              // }),
-              Obx(() =>  Switch(value: exampleController.notification.value, onChanged: (value){
-                // notification=value;
-                exampleController.setNotification(value);
-                // setState(() {
-                  
-                // });
-              }),)
-
-            ],
-          )
-        ],
-      )
-      
+      body: ListView.builder(
+        itemCount: controller.fruitList.length,
+        itemBuilder: (context,index){
+        return Card(
+          child: ListTile(
+            onTap: (){
+              if(controller.tempfruitList.contains(controller.fruitList[index].toString())){
+                controller.removeToFavourite(controller.fruitList[index].toString());
+              }
+              else{
+                controller.addToFavourite(controller.fruitList[index].toString());
+              }
+            },
+            title: Text(controller.fruitList[index].toString()),
+            // trailing: Icon(Icons.favorite,color: controller.tempfruitList.contains(controller.fruitList[index].toString()) ? Colors.red :Colors.white),
+            trailing: Obx(() => Icon(Icons.favorite,color: controller.tempfruitList.contains(controller.fruitList[index].toString()) ? Colors.red :Colors.white)),
+          ),
+        );
+      }),
     );
   }
 }
